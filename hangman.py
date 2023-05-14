@@ -1,26 +1,29 @@
-count = 6
-alreadyGuessed = []
-
 def playGame(secretWord):
     secretWord = list(secretWord)
-    encWord = list(len(secretWord) * '*') 
-    # print(encWord)
-    while (count > 0) & (encWord != secretWord):
-        #print('The game is afoot!')
-        print(str(encWord))
-        nextGuess = input('Guess a letter... \n')
-        for char in range(len(secretWord)):
-            if nextGuess == secretWord[char]:
-                encWord[char] = secretWord[char]
-                continue
-            else:
-                break
-
-    if (count > 0 ) & (encWord == secretWord):
-        print('You win!')
+    encWord = list(len(secretWord) * '*')
+    count = 0
+    alreadyGuessed = []
+    
+    print(secretWord)
+    while (count < 6):
+        print(encWord)
+        print(f'You have {6 - count} guesses remaining')
+        nextGuess = input('Guess a letter...')
+        if nextGuess in secretWord:
+            for i,v in enumerate(secretWord):
+                if secretWord[i] == nextGuess:
+                    v = secretWord[i]
+                    encWord[i] = v
+            return encWord
+            alreadyGuessed.append(nextGuess)
+            continue
+        elif nextGuess not in secretWord:
+            print(f'{nextGuess} is incorrect, try again!')
+            guesses -= 1
+            alreadyGuessed.append(nextGuess)
+        else:
+            print(f'You have already tried {nextGuess}, try something else!')
         
-    else:
-        print('You lose!')
     
 
 
